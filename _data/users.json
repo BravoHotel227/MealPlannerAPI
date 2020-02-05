@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "5e30c56996249e33805f9301",
+    "name": "Ben Harrison",
+    "email": "benharrison98@hotmail.com",
+    "password": "123456",
+    "role": "admin"
+  },
+  {
+    "_id": "5e30c56996249e33805f9302",
+    "name": "Georgia White",
+    "email": "zombiemage12343@hotmail.com",
+    "password": "123456",
+    "role": "user"
+  }
+]
