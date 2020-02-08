@@ -83,8 +83,8 @@ Api for the meal planner website</title><style media=screen>/*!* Bootstrap v3.3.
 <strong class="request-method border-success">POST</strong>
 &nbsp;
 {{URL}}/api/v1/auth/register</h4></a></div><div id=collapse-Authentication-RegisterUser class="panel-collapse collapse"><div class=panel-body><h5 class="label label-default">Description</h5><br><small><p>Register a user into the database</small><br><br><h5 class="label label-warning">Headers</h5><table class="table table-hover"><thead><tr><th>Key<th>Value<th>Description<tbody><tr><td>Content-Type<td>application/json<td><p>JSON Type</table><h5 class="label label-primary">Body</h5><span class=resp-prettyprint>{
-"name": "Ben Harrison",
-"email": "ben@hotmail.com",
+"name": "Bob Smith",
+"email": "bob@hotmail.com",
 "password":"123456",
 "role": "user"
 }</span><div class=clearfix></div></div></div></div><div class="panel panel-info" id=jump-Authentication-GetLoggedInUser><div class=panel-heading><small class="pull-right text-muted">raw</small>
@@ -96,8 +96,8 @@ Api for the meal planner website</title><style media=screen>/*!* Bootstrap v3.3.
 <strong class="request-method border-warning">PUT</strong>
 &nbsp;
 {{URL}}/api/v1/auth/updatedetails</h4></a></div><div id=collapse-Authentication-UpdateUserDetails class="panel-collapse collapse"><div class=panel-body><h5 class="label label-default">Description</h5><br><small><p>Update the users name or email address</small><br><br><h5 class="label label-warning">Headers</h5><table class="table table-hover"><thead><tr><th>Key<th>Value<th>Description<tbody><tr><td>Content-Type<td>application/json<td><p>JSON Type</table><h5 class="label label-primary">Body</h5><span class=resp-prettyprint>{
-"name": "Ben Harrison",
-"email": "ben@gmail.com"
+"name": "Bob Smith",
+"email": "bob@gmail.com"
 }</span><div class=clearfix></div></div></div></div><div class="panel panel-warning" id=jump-Authentication-UpdatePassword><div class=panel-heading><small class="pull-right text-muted">raw</small>
 <a class=text-warning data-toggle=collapse data-parent=#accordion-Authentication href=#collapse-Authentication-UpdatePassword><h4 class=panel-title><span class="glyphicon glyphicon-plus"></span><strong>Update Password</strong> &nbsp;|&nbsp;
 <strong class="request-method border-warning">PUT</strong>
@@ -110,7 +110,7 @@ Api for the meal planner website</title><style media=screen>/*!* Bootstrap v3.3.
 <strong class="request-method border-success">POST</strong>
 &nbsp;
 {{URL}}/api/v1/auth/login</h4></a></div><div id=collapse-Authentication-LoginUser class="panel-collapse collapse"><div class=panel-body><h5 class="label label-default">Description</h5><br><small><p>Log the user in based on the loggin details</small><br><br><h5 class="label label-warning">Headers</h5><table class="table table-hover"><thead><tr><th>Key<th>Value<th>Description<tbody><tr><td>Content-Type<td>application/json<td><p>JSON Type</table><h5 class="label label-primary">Body</h5><span class=resp-prettyprint>{
-"email": "ben@gmail.com",
+"email": "bob@gmail.com",
 "password":"123454"
 }</span><div class=clearfix></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class=panel-heading><h3 class=panel-title id=Planner>Planner
 <span class=badge>6</span></h3></div><div class=panel-body><p><div class=request-item><div class=panel-group id=accordion-Planner><div class="panel panel-info" id=jump-Planner-GetAllPlans><div class=panel-heading><small class="pull-right text-muted"></small><a class=text-info data-toggle=collapse data-parent=#accordion-Planner href=#collapse-Planner-GetAllPlans><h4 class=panel-title><span class="glyphicon glyphicon-plus"></span><strong>Get All Plans</strong> &nbsp;|&nbsp;
