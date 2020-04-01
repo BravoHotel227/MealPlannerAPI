@@ -1,7 +1,7 @@
-const path = require("path");
-const ErrorResponse = require("../utils/errorResponse");
-const Recipe = require("../models/Recipe");
-const asyncHandler = require("../middleware/async");
+const path = require('path');
+const ErrorResponse = require('../utils/errorResponse');
+const Recipe = require('../models/Recipe');
+const asyncHandler = require('../middleware/async');
 
 // @desc    Get all recipes
 // @route   GET /api/v1/recipes
@@ -35,7 +35,7 @@ exports.createRecipe = asyncHandler(async (req, res, next) => {
   const recipe = await Recipe.create(req.body);
 
   res.status(201).json({
-    sucess: true,
+    success: true,
     data: recipe
   });
 });
@@ -51,7 +51,7 @@ exports.updateRecipe = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user owns recipe
-  if (recipe.user.toString() !== req.user.id && req.user.role !== "admin") {
+  if (recipe.user.toString() !== req.user.id && req.user.role !== 'admin') {
     return next(
       new ErrorResponse(
         `User ${req.params.id} is not authorized to update this recipe`,
@@ -65,7 +65,7 @@ exports.updateRecipe = asyncHandler(async (req, res, next) => {
     runValidators: true
   });
   res.status(200).json({
-    sucess: true,
+    success: true,
     data: recipe
   });
 });
@@ -81,18 +81,15 @@ exports.deleteRecipe = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user owns recipe
-  if (recipe.user.toString() !== req.user.id && req.user.role !== "admin") {
+  if (recipe.user.toString() !== req.user.id && req.user.role !== 'admin') {
     return next(
-      new ErrorResponse(
-        `User ${req.params.id} is not authorized to update this recipe`,
-        401
-      )
+      new ErrorResponse(`User is not authorized to delete this recipe`, 401)
     );
   }
 
-  await Recipe.deleteOne();
+  await recipe.deleteOne();
   res.status(201).json({
-    sucess: true,
+    success: true,
     data: {}
   });
 });
@@ -107,9 +104,9 @@ exports.recipePhotoUpload = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`Recipe not found with id of ${req.params.id}`, 404)
     );
   }
-  
+
   // Make sure user owns recipe
-  if (recipe.user.toString() !== req.user.id && req.user.role !== "admin") {
+  if (recipe.user.toString() !== req.user.id && req.user.role !== 'admin') {
     return next(
       new ErrorResponse(
         `User ${req.params.id} is not authorized to update this recipe`,
@@ -124,7 +121,7 @@ exports.recipePhotoUpload = asyncHandler(async (req, res, next) => {
 
   const file = req.files.file;
   // Make sure the image is a photo
-  if (!file.mimetype.startsWith("image")) {
+  if (!file.mimetype.startsWith('image')) {
     return next(new ErrorResponse(`Please upload a image file`, 400));
   }
 
