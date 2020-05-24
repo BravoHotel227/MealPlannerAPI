@@ -1,58 +1,58 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const PlannerSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.ObjectId,
-    ref: "User",
-    required: true
+    ref: 'User',
+    required: true,
   },
   startDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
-  monday: {
-    type: [mongoose.Schema.ObjectId],
-    ref: "Recipe",
-    required: true
+  breakfastID: {
+    type: [String],
   },
-  tuesday: {
-    type: [mongoose.Schema.ObjectId],
-    ref: "Recipe",
-    required: true
+  lunchID: {
+    type: [String],
   },
-  wednesday: {
-    type: [mongoose.Schema.ObjectId],
-    ref: "Recipe",
-    required: true
+  dinnerID: {
+    type: [String],
   },
-  thursday: {
-    type: [mongoose.Schema.ObjectId],
-    ref: "Recipe",
-    required: true
+  dessertID: {
+    type: [String],
   },
-  friday: {
-    type: [mongoose.Schema.ObjectId],
-    ref: "Recipe",
-    required: true
+  snackID: {
+    type: [String],
   },
-  saturday: {
-    type: [mongoose.Schema.ObjectId],
-    ref: "Recipe",
-    required: true
+  breakfastName: {
+    type: [String],
+    default: '',
   },
-  sunday: {
-    type: [mongoose.Schema.ObjectId],
-    ref: "Recipe",
-    required: true
+  lunchName: {
+    type: [String],
+    default: '',
+  },
+  dinnerName: {
+    type: [String],
+    default: '',
+  },
+  dessertName: {
+    type: [String],
+    default: '',
+  },
+  snackName: {
+    type: [String],
+    default: '',
   },
   veganOnly: {
-      type: Boolean,
-      default: false
+    type: Boolean,
+    default: false,
   },
   glutenFreeOnly: {
-      type: Boolean,
-      default: false
-  }
+    type: Boolean,
+    default: false,
+  },
 });
 
-module.exports = mongoose.model("Planner", PlannerSchema);
+module.exports = mongoose.model('Planner', PlannerSchema);

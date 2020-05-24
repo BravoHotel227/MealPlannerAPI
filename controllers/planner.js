@@ -1,21 +1,22 @@
-const path = require("path");
-const ErrorResponse = require("../utils/errorResponse");
-const Planner = require("../models/Planner");
-const asyncHandler = require("../middleware/async");
+const path = require('path');
+const ErrorResponse = require('../utils/errorResponse');
+const Planner = require('../models/Planner');
+const Recipe = require('../models/Recipe');
+const asyncHandler = require('../middleware/async');
 
 // @desc    Get all plans
 // @route   GET /api/v1/planner
 // @route   GET /api/v1/users/:id/planner
 // @access  Public
 exports.getPlans = asyncHandler(async (req, res, next) => {
-    if(req.params.userId) {
-        const plan = await Planner.find({user: req.params.userId})
-        return res.status(200).json({
-            sucess: true,
-            count: plan.length,
-            data: plan
-        })
-    }
+  if (req.params.userId) {
+    const plan = await Planner.find({ user: req.params.userId });
+    return res.status(200).json({
+      sucess: true,
+      count: plan.length,
+      data: plan,
+    });
+  }
   res.status(200).json(res.advancedResults);
 });
 
@@ -31,7 +32,7 @@ exports.getPlan = asyncHandler(async (req, res, next) => {
   }
   res.status(200).json({
     success: true,
-    data: plan
+    data: plan,
   });
 });
 
@@ -41,11 +42,62 @@ exports.getPlan = asyncHandler(async (req, res, next) => {
 exports.createPlan = asyncHandler(async (req, res, next) => {
   // Add user to plan
   req.body.user = req.user.id;
-  const plan = await Planner.create(req.body);
 
+  let breakfast = [];
+  let breakfastTitle = [];
+  let lunch = [];
+  let lunchTitle = [];
+  let dinner = [];
+  let dinnerTitle = [];
+  let dessert = [];
+  let dessertTitle = [];
+  let snack = [];
+  let snackTitle = [];
+  for (i = 0; i < 7; i++) {
+    if (req.body.breakfastID[i] == '') {
+      breakfast[i] = '';
+    } else {
+      breakfast[i] = await Recipe.findById(req.body.breakfastID[i]).select(
+        'title'
+      );
+    }
+    if (req.body.lunchID[i] == '') {
+      lunch[i] = '';
+    } else {
+      lunch[i] = await Recipe.findById(req.body.lunchID[i]).select('title');
+    }
+    if (req.body.dinnerID[i] == '') {
+      dinner[i] = '';
+    } else {
+      dinner[i] = await Recipe.findById(req.body.dinnerID[i]).select('title');
+    }
+    if (req.body.dessertID[i] == '') {
+      dessert[i] = '';
+    } else {
+      dessert[i] = await Recipe.findById(req.body.dessertID[i]).select('title');
+    }
+    if (req.body.snackID[i] == '') {
+      snack[i] = '';
+    } else {
+      snack[i] = await Recipe.findById(req.body.snackID[i]).select('title');
+    }
+
+    breakfastTitle[i] = breakfast[i].title;
+    lunchTitle[i] = lunch[i].title;
+    dinnerTitle[i] = dinner[i].title;
+    dessertTitle[i] = dessert[i].title;
+    snackTitle[i] = snack[i].title;
+  }
+  req.body.breakfastName = breakfastTitle;
+  req.body.lunchName = lunchTitle;
+  req.body.dinnerName = dinnerTitle;
+  req.body.dessertName = dessertTitle;
+  req.body.snackName = snackTitle;
+  const plan = await Planner.create(req.body);
+  //console.log(recipe);
   res.status(201).json({
     sucess: true,
-    data: plan
+    data: plan,
   });
 });
 
@@ -60,7 +112,7 @@ exports.updatePlan = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user owns plan
-  if (plan.user.toString() !== req.user.id && req.user.role !== "admin") {
+  if (plan.user.toString() !== req.user.id && req.user.role !== 'admin') {
     return next(
       new ErrorResponse(
         `User ${req.params.id} is not authorized to update this plan`,
@@ -71,11 +123,11 @@ exports.updatePlan = asyncHandler(async (req, res, next) => {
 
   plan = await Planner.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
-    runValidators: true
+    runValidators: true,
   });
   res.status(200).json({
     sucess: true,
-    data: plan
+    data: plan,
   });
 });
 
@@ -90,7 +142,7 @@ exports.deletePlan = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user owns plan
-  if (plan.user.toString() !== req.user.id && req.user.role !== "admin") {
+  if (plan.user.toString() !== req.user.id && req.user.role !== 'admin') {
     return next(
       new ErrorResponse(
         `User ${req.params.id} is not authorized to update this plan`,
@@ -98,9 +150,9 @@ exports.deletePlan = asyncHandler(async (req, res, next) => {
       )
     );
   }
-  await Planner.deleteOne();
+  await plan.deleteOne();
   res.status(201).json({
     sucess: true,
-    data: {}
+    data: {},
   });
 });
