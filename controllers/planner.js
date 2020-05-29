@@ -167,7 +167,7 @@ exports.updatePlan = asyncHandler(async (req, res, next) => {
       }
       dessertTitle[i] = dessert[i].title;
     }
-    if (req.body.snack) {
+    if (req.body.snackID) {
       if (req.body.snackID[i] == '' || null) {
         snack[i] = '';
       } else {
