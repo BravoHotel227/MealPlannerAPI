@@ -120,7 +120,56 @@ exports.updatePlan = asyncHandler(async (req, res, next) => {
       )
     );
   }
+  let breakfast = [];
+  let breakfastTitle = [];
+  let lunch = [];
+  let lunchTitle = [];
+  let dinner = [];
+  let dinnerTitle = [];
+  let dessert = [];
+  let dessertTitle = [];
+  let snack = [];
+  let snackTitle = [];
+  for (i = 0; i < 7; i++) {
+    if (req.body.breakfastID[i] == '') {
+      breakfast[i] = '';
+    } else {
+      breakfast[i] = await Recipe.findById(req.body.breakfastID[i]).select(
+        'title'
+      );
+    }
+    if (req.body.lunchID[i] == '') {
+      lunch[i] = '';
+    } else {
+      lunch[i] = await Recipe.findById(req.body.lunchID[i]).select('title');
+    }
+    if (req.body.dinnerID[i] == '') {
+      dinner[i] = '';
+    } else {
+      dinner[i] = await Recipe.findById(req.body.dinnerID[i]).select('title');
+    }
+    if (req.body.dessertID[i] == '') {
+      dessert[i] = '';
+    } else {
+      dessert[i] = await Recipe.findById(req.body.dessertID[i]).select('title');
+    }
+    if (req.body.snackID[i] == '') {
+      snack[i] = '';
+    } else {
+      snack[i] = await Recipe.findById(req.body.snackID[i]).select('title');
+    }
 
+    breakfastTitle[i] = breakfast[i].title;
+    lunchTitle[i] = lunch[i].title;
+    dinnerTitle[i] = dinner[i].title;
+    dessertTitle[i] = dessert[i].title;
+    snackTitle[i] = snack[i].title;
+  }
+  req.body.breakfastName = breakfastTitle;
+  req.body.lunchName = lunchTitle;
+  req.body.dinnerName = dinnerTitle;
+  req.body.dessertName = dessertTitle;
+  req.body.snackName = snackTitle;
   plan = await Planner.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
