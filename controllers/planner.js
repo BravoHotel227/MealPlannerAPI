@@ -131,29 +131,29 @@ exports.updatePlan = asyncHandler(async (req, res, next) => {
   let snack = [];
   let snackTitle = [];
   for (i = 0; i < 7; i++) {
-    if (req.body.breakfastID[i] == '') {
+    if (req.body.breakfastID[i] == '' || null) {
       breakfast[i] = '';
     } else {
       breakfast[i] = await Recipe.findById(req.body.breakfastID[i]).select(
         'title'
       );
     }
-    if (req.body.lunchID[i] == '') {
+    if (req.body.lunchID[i] == '' || null) {
       lunch[i] = '';
     } else {
       lunch[i] = await Recipe.findById(req.body.lunchID[i]).select('title');
     }
-    if (req.body.dinnerID[i] == '') {
+    if (req.body.dinnerID[i] == '' || null) {
       dinner[i] = '';
     } else {
       dinner[i] = await Recipe.findById(req.body.dinnerID[i]).select('title');
     }
-    if (req.body.dessertID[i] == '') {
+    if (req.body.dessertID[i] == '' || null) {
       dessert[i] = '';
     } else {
       dessert[i] = await Recipe.findById(req.body.dessertID[i]).select('title');
     }
-    if (req.body.snackID[i] == '') {
+    if (req.body.snackID[i] == '' || null) {
       snack[i] = '';
     } else {
       snack[i] = await Recipe.findById(req.body.snackID[i]).select('title');
