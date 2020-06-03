@@ -6,9 +6,9 @@ const PlannerSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  startDate: {
-    type: Date,
-    default: Date.now,
+  name: {
+    type: String,
+    required: true
   },
   breakfastID: {
     type: [String],
